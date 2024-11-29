@@ -46,7 +46,7 @@ neuralrogue_website = """
             padding: 0;
         }
         header {
-            background: url('https://via.placeholder.com/1920x600') no-repeat center center/cover;
+            no-repeat center center/cover;
             padding: 80px 20px;
             color: #fff;
         }

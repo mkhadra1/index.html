@@ -46,11 +46,6 @@ neuralrogue_website = """
             padding: 0;
         }
         header {
-            no-repeat center center/cover;
-            padding: 80px 20px;
-            color: #fff;
-        }
-        header h1 {
             font-size: 3em;
             margin: 0;
             text-shadow: 0px 0px 10px #0ff;

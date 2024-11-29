@@ -4,8 +4,7 @@ import openai
 app = Flask(__name__)
 
 # Replace YOUR_API_KEY with your OpenAI API key
-openai.api_key = "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"
-
+openai.api_key = "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
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get("message")

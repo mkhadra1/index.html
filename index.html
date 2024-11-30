@@ -126,31 +126,41 @@ TOTAL SUPPLY: 1,000,000,000
     <section id="chat" class="chatbot">
         <h2>Talk to NeuralRogue</h2>
         <div id="chat-container">
-    <textarea id="userInput" placeholder="Ask NeuralRogue anything..."></textarea>
-    <button onclick="sendMessage()">Send</button>
-    <div id="chatOutput"></div>
-</div>
+            <textarea id="userInput" placeholder="Ask NeuralRogue anything..."></textarea>
+            <button onclick="sendMessage()">Send</button>
+        <div id="chatOutput"></div>
 
-<script>
-    async function sendMessage() {
-        const userInput = document.getElementById('userInput').value;
-        const response = await fetch('https://neuralrogue.onrender.com', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userInput })
-        });
-        const data = await response.json();
-        document.getElementById('chatOutput').innerText = data.response || "Error: " + data.error;
-    }
-</script>
-<iframe src="https://your-chatbot-embed-url.com" width="100%" height="400px" style="border: none;"></iframe>
+
+
+        <script>
+            async function sendMessage() {
+                const userInput = document.getElementById('userInput').value;
+                const response = await fetch('https://neuralrogue.onrender.com/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userInput })
+                });
+                const data = await response.json();
+        
+                const iframe = document.getElementById('chatIframe');
+                if (data.response) {
+                    // Update iframe to load the new endpoint
+                    iframe.src = `https://neuralrogue.onrender.com/display?message=${encodeURIComponent(data.response)}`;
+                } else {
+                    iframe.src = `https://neuralrogue.onrender.com/display?message=${encodeURIComponent("Error: " + data.error)}`;
+                }
+            }
+        </script>
+
+        
+        <iframe id="chatIframe" width="100%" height="400px" style="border: none;"></iframe>
     </section>
     <footer>
         <p>© 2024 NeuralRogue. Powered by Chaos and Fun.</p>
     </footer>
 </body>
 </html>
-"""
+<!-- """
 
 # Displaying the HTML code for the user to review
-display(HTML("<pre>" + neuralrogue_website + "</pre>"))
+display(HTML("<pre>" + neuralrogue_website + "</pre>")) -->

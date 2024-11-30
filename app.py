@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True, debug=True)
 
 api_key = os.getenv("API_KEY")
 
@@ -13,8 +13,16 @@ api_key = os.getenv("API_KEY")
 client = OpenAI(
     api_key = api_key
 )
-@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
+    if request.method == 'OPTIONS':
+        # Handle preflight OPTIONS request
+        response = app.response_class(status=200)
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        return response
+    
     user_message = request.json.get("message")
     if not user_message:
         return jsonify({"error": "No message provided"}), 400

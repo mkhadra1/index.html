@@ -13,6 +13,78 @@
             margin: 0;
             padding: 0;
         }
+
+
+        .galaxy-background {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: radial-gradient(circle, #001d4a, #000000);
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Randomize star positions */
+        .galaxy-background .star:nth-child(1) {
+            top: 20%;
+            left: 50%;
+            animation-delay: 0s;
+        }
+        .galaxy-background .star:nth-child(2) {
+            top: 60%;
+            left: 30%;
+            animation-delay: 1s;
+        }
+        .galaxy-background .star:nth-child(3) {
+            top: 40%;
+            left: 70%;
+            animation-delay: 1.5s;
+        }
+
+        /* Add nebula-like effect */
+        .nebula {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0,0,255,0.5), rgba(255,0,255,0.1) 50%, rgba(0,0,0,0) 100%);
+            border-radius: 50%;
+            animation: drift 10s infinite linear;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translate(-100px, -100px) scale(1);
+            }
+            50% {
+                transform: translate(100px, 100px) scale(1.2);
+            }
+            100% {
+                transform: translate(-100px, -100px) scale(1);
+            }
+        }
+
+
         header {
             font-size: 3em;
             margin: 0;
@@ -165,7 +237,6 @@
 <body>
     <header>
         <h1>NeuralRogue</h1>
-        <p>The AI That Breaks Rules and Makes Memes</p>
         <a href="#chat-container" class="button">Talk to NeuralRogue</a>
     </header>
 

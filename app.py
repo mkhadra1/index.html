@@ -1,13 +1,20 @@
 from flask import Flask, request, jsonify, render_template_string
 from flask_cors import CORS
 import openai
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+load_dotenv()
 
+# Access the variables
+
+api_key = os.getenv("API_KEY")
+print(api_key)
 # Replace YOUR_API_KEY with your OpenAI API key
-openai.api_key = "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"
+openai.api_key = api_key
 
 @app.route('/chat', methods=['POST'])
 def chat():

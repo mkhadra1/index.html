@@ -19,7 +19,7 @@ def chat():
 
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are NeuralRogue, a fun and edgy AI assistant."},
                 {"role": "user", "content": user_message}

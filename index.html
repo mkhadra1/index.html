@@ -135,19 +135,30 @@ TOTAL SUPPLY: 1,000,000,000
         <script>
             async function sendMessage() {
                 const userInput = document.getElementById('userInput').value;
-                const response = await fetch('https://neuralrogue.onrender.com/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: userInput })
-                });
-                const data = await response.json();
-        
-                const iframe = document.getElementById('chatIframe');
-                if (data.response) {
-                    // Update iframe to load the new endpoint
-                    iframe.src = `https://neuralrogue.onrender.com/display?message=${encodeURIComponent(data.response)}`;
-                } else {
-                    iframe.src = `https://neuralrogue.onrender.com/display?message=${encodeURIComponent("Error: " + data.error)}`;
+                const chatOutput = document.getElementById('chatOutput');
+    
+                try {
+                    const response = await fetch('https://neuralrogue.onrender.com/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userInput })
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+    
+                    const data = await response.json();
+    
+                    // Display the response in the chatOutput div
+                    if (data.response) {
+                        chatOutput.innerHTML = `<p>${data.response}</p>`;
+                    } else {
+                        chatOutput.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                    }
+                } catch (err) {
+                    chatOutput.innerHTML = `<p class="error">An error occurred: ${err.message}</p>`;
+                    console.error("Fetch error:", err);
                 }
             }
         </script>

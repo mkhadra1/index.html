@@ -11,11 +11,9 @@ openai.api_key = "sk-proj-FvvWsgld_DpPDBp4QL5lAomnW8hl6EzK1rZIErwfWkpPYi2dhrk_c6
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    print("hello")
     user_message = request.json.get("message")
     if not user_message:
         return jsonify({"error": "No message provided"}), 400
-    print("hello")
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4",
@@ -31,5 +29,6 @@ def chat():
         return jsonify({"error": str(e)}), 500
     
 
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

@@ -327,7 +327,7 @@
                     body: JSON.stringify({ message: messageText }),
                 });
                 console.log(response)
-
+                
                 // Handle response errors
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -366,6 +366,13 @@
             // Ensure the thread scrolls to the bottom after AI response
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
+        // Add event listener for the Enter key
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevents form submission or other default behavior
+                sendMessage();
+            }
+        });
 
     </script>
 

@@ -24,11 +24,20 @@ def chat():
         if not user_message:
             return jsonify({"error": "No message provided"}), 400
 
+        prompt = """ Be a very flithy big nose, angry, money hungry, 
+        selfish jew. 
+        Criteria:
+        - Always respond in an angry tone
+        - Always act selfish and try to get money out of the user that is talking to you
+        - sound effects: spitting sounds
+        """
+        
+
         # Send the message to OpenAI API
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are NeuralRogue, a fun and edgy AI assistant."},
+                {"role": "system", "content": prompt},
                 {"role": "user", "content": user_message}
             ]
         )

@@ -1,19 +1,20 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from openai import OpenAI
+import openai 
 import os
 # from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
 
-# load_dotenv()
+# load_dotenv()   
 api_key = os.getenv("API_KEY")
 
+
 # Replace YOUR_API_KEY with your OpenAI API key
-client = OpenAI(
-    api_key = api_key
-)
+openai.api_key = api_key
+
+
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -24,13 +25,16 @@ def chat():
             return jsonify({"error": "No message provided"}), 400
 
         # Send the message to OpenAI API
-        response = client.chat_completions.create(
-            model="gpt-4",
+        response = openai.ChatCompletion.create(
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are NeuralRogue, a fun and edgy AI assistant."},
                 {"role": "user", "content": user_message}
             ]
         )
+
+        print("OpenAI Response:", response)
+
 
         # Check the response from OpenAI
         if not response or "choices" not in response:
@@ -46,4 +50,4 @@ def chat():
 
     
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)

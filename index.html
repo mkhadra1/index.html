@@ -275,7 +275,7 @@
         <div id="messages"></div>
         <div id="input-container">
             <textarea id="userInput" placeholder="Ask NeuralRogue anything..."></textarea>
-            <button onclick="sendMessage()">Send</button>
+            <button>Send</button>
         </div>
     </section>
 
@@ -300,8 +300,8 @@
             }
 
             // Get the user's message and trim whitespace
-            const messageText = userInput.value?.trim();
-            // console.log("User input value (trimmed):", messageText);
+            const messageText = userInput.value.trim();
+            console.log("User input value (trimmed):", messageText);
 
             // If the message is empty, warn and exit
             if (!messageText) {
@@ -332,6 +332,8 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                console.log("here")
+                console.log(response)
 
                 // Parse the JSON response
                 const data = await response.json();

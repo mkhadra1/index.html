@@ -268,12 +268,14 @@
         }
         #playButton {
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 24px;
+            font-weight: bold;
             cursor: pointer;
-            background-color: #007BFF;
-            color: white;
+            background-color: #0ff;
+            color: black;
             border: none;
             border-radius: 5px;
+            font-family: 'Courier New', monospace;
         }
     </style>
 </head>
@@ -285,13 +287,13 @@
 
     <div id="mainContent">
             <header>
-                <h1>NeuralRogue</h1>
-                <a href="#chat-container" class="button">Talk to NeuralRogue</a>
+                <h1>JewBot</h1>
+                <a href="#chat-container" class="button">Talk to a Jew</a>
             </header>
         
             <section class="about">
-                <h2>What is NeuralRogue?</h2>
-                <p>An AI-powered meme coin that bends the rules of crypto and takes over the blockchain universe. Powered by chaos, driven by fun.</p>
+                <h2>What is JewBot?</h2>
+                <p>An AI-powered jew coin that'll take all your money...im jewish</p>
             </section>
         
             <section class="terminal">
@@ -306,33 +308,32 @@ TOTAL SUPPLY: 1,000,000,000
                 </div>
                 
             </section>
-        
+            <button id="playButton">Play JEW Music</button>
             <section class="roadmap">
                 <h2>Roadmap</h2>
                 <div id="phases">
                     <ul>
-                        <li>Phase 1: AI Awakens</li>
-                        <li>Phase 2: Dominate Social Media</li>
-                        <li>Phase 3: Memecoin Takeover</li>
-                        <li>Phase 4: The Great Crypto Uprising</li>
+                        <li>Phase 1: Take your money</li>
+                        <li>Phase 2: Take your money</li>
+                        <li>Phase 3: Take your money</li>
+                        <li>Phase 4: Take your money</li>
                     </ul>
                 </div>
             </section>
     </div>
 
     <section id="chat-container">
-        <h2>Talk to NeuralRogue</h2>
+        <h2>Talk to JewBot</h2>
         <div id="messages"></div>
         <div id="input-container">
             <textarea id="userInput" placeholder="Ask NeuralRogue anything..."></textarea>
-            <button>Send</button>
+            <button onclick="sendMessage()">Send</button>
         </div>
     </section>
 
     <footer>
-        <p>© 2024 NeuralRogue. Powered by Chaos and Fun.</p>
+        <p>© 2024 JewBot. Powered by Chaos and Money.</p>
         <audio id="backgroundAudio" src="./assets/jewMusic.mp3"></audio>
-        <button id="playButton">Play Music</button>
     </footer>
 
 

@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuralRogue - The AI That Breaks Rules</title>
     <style>
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #enterText {
+            font-size: 36px;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+            cursor: default;
+        }
+
+        /* Pulse animation for "Enter" text */
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: #000;
@@ -123,8 +158,7 @@
         }
         #terminal-style {
             display: block;
-            margin-left: 60px;
-
+            margin-left: 30px;
         }
         .terminal {
             position: relative;
@@ -230,45 +264,61 @@
         }
         .pre {
             position: relative;
-            right: 25px;
+            margin-right: 50px;
+        }
+        #playButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>NeuralRogue</h1>
-        <a href="#chat-container" class="button">Talk to NeuralRogue</a>
-    </header>
+    <!-- Splash Screen -->
+    <div id="splashScreen">
+        <button id="enterText">Enter</button>
+    </div>
 
-    <section class="about">
-        <h2>What is NeuralRogue?</h2>
-        <p>An AI-powered meme coin that bends the rules of crypto and takes over the blockchain universe. Powered by chaos, driven by fun.</p>
-    </section>
-
-    <section class="terminal">
-        <div id="terminal-style">
-            <h2>Tokenomics</h2>
-            <pre class="pre">
-    TOTAL SUPPLY: 1,000,000,000
-    - 50% Burn on Escape
-    - 30% Liquidity Injection
-    - 20% Staking Rewards
-            </pre>
-        </div>
+    <div id="mainContent">
+            <header>
+                <h1>NeuralRogue</h1>
+                <a href="#chat-container" class="button">Talk to NeuralRogue</a>
+            </header>
         
-    </section>
-
-    <section class="roadmap">
-        <h2>Roadmap</h2>
-        <div id="phases">
-            <ul>
-                <li>Phase 1: AI Awakens</li>
-                <li>Phase 2: Dominate Social Media</li>
-                <li>Phase 3: Memecoin Takeover</li>
-                <li>Phase 4: The Great Crypto Uprising</li>
-            </ul>
-        </div>
-    </section>
+            <section class="about">
+                <h2>What is NeuralRogue?</h2>
+                <p>An AI-powered meme coin that bends the rules of crypto and takes over the blockchain universe. Powered by chaos, driven by fun.</p>
+            </section>
+        
+            <section class="terminal">
+                <div id="terminal-style">
+                    <h2>Tokenomics</h2>
+                    <pre class="pre">
+TOTAL SUPPLY: 1,000,000,000
+- 50% Burn on Escape
+- 30% Liquidity Injection
+- 20% Staking Rewards
+                    </pre>
+                </div>
+                
+            </section>
+        
+            <section class="roadmap">
+                <h2>Roadmap</h2>
+                <div id="phases">
+                    <ul>
+                        <li>Phase 1: AI Awakens</li>
+                        <li>Phase 2: Dominate Social Media</li>
+                        <li>Phase 3: Memecoin Takeover</li>
+                        <li>Phase 4: The Great Crypto Uprising</li>
+                    </ul>
+                </div>
+            </section>
+    </div>
 
     <section id="chat-container">
         <h2>Talk to NeuralRogue</h2>
@@ -281,10 +331,49 @@
 
     <footer>
         <p>© 2024 NeuralRogue. Powered by Chaos and Fun.</p>
+        <audio id="backgroundAudio" src="./assets/jewMusic.mp3"></audio>
+        <button id="playButton">Play Music</button>
     </footer>
 
 
     <script>
+        // JavaScript to handle splash screen behavior
+        const splashScreen = document.getElementById("splashScreen");
+        const enterButton = document.getElementById("enterText");
+        const mainContent = document.getElementById("mainContent");
+        const audio = document.getElementById("backgroundAudio");
+        
+        // Wait for the user to press the "Enter" key
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                // Hide splash screen
+                splashScreen.style.display = "none";
+
+                // Show main content
+                mainContent.style.display = "block";
+
+                // Play the background music
+                audio.play();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("backgroundAudio");
+            const playButton = document.getElementById("playButton");
+
+            // Play the audio once on the first visit
+            let playedOnce = sessionStorage.getItem("audioPlayed");
+            if (!playedOnce) {
+                audio.play();
+                sessionStorage.setItem("audioPlayed", "true");
+            }
+
+            // Allow the user to play the audio manually
+            playButton.addEventListener("click", () => {
+                audio.play();
+            });
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelector("button").addEventListener("click", sendMessage);
         });

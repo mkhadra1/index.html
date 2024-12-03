@@ -343,10 +343,11 @@ TOTAL SUPPLY: 1,000,000,000
         const enterButton = document.getElementById("enterText");
         const mainContent = document.getElementById("mainContent");
         const audio = document.getElementById("backgroundAudio");
-        
+        // Flag to ensure the music plays only once
+        let hasMusicPlayed = false;
         // Wait for the user to press the "Enter" key
         document.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
+            if (event.key === "Enter" && hasMusicPlayed === false) {
                 // Hide splash screen
                 splashScreen.style.display = "none";
 
@@ -355,6 +356,7 @@ TOTAL SUPPLY: 1,000,000,000
 
                 // Play the background music
                 audio.play();
+                hasMusicPlayed = true;
             }
         });
 
